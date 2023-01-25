@@ -8,7 +8,7 @@ const Navbar = () => {
     <div className="navbar px-6 bg-base-100">
       <div className="flex-1">
         <CustomLink href="/" className="text-xl font-extrabold tracking-widest">
-          T2 Template
+          NPS
         </CustomLink>
       </div>
       <div className="flex-none">

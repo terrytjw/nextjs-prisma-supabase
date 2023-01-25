@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Everytime you make changes to your database scheme (in this case you're doing it by modifying this schema.prisma file),
+// you have to run `yarn prisma migrate dev` to apply the changes to your database & run `yarn prisma generate` to tailor the Prisma Client for your current schema. 
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Projects {
+  id    Int     @id @default(autoincrement())
+  name  String?
+  Tasks Tasks[]
+
+  // createdAt DateTime @default(now())
+  // updatedAt DateTime @updatedAt
+}
+
+model Tasks {
+  id                Int       @id @default(autoincrement())
+  name              String?
+  completedDateTime DateTime?
+  order             Int?
+  project           Projects  @relation(fields: [projectId], references: [id])
+  projectId         Int
+
+  // createdAt DateTime @default(now())
+  // updatedAt DateTime @updatedAt
+}
